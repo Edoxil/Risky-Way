@@ -1,30 +1,54 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class Edge : MonoBehaviour
 {
 
-    private Vector3 _rotation = new Vector3(50f, 0f, 0f);
-    private Vector3 _defaultRot = new Vector3(-50f, 0f, 0f);
-  
+    public Vector3 qwerty;
+    Vector3 defaultRot;
+
     private void Start()
     {
-       
+        defaultRot = transform.localEulerAngles;
     }
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Slash();
 
-        //    transform.Rotate(_rotation);
-        //}
-        //if (Input.GetMouseButtonUp(0))
-        //{
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+           
+            defaultRot = new Vector3(0f, 0f, 0f);
 
-        //    transform.Rotate(_defaultRot);
-        //}
+            Vector3 rotation = Vector3.forward * 50f;
+
+            Sequence seq = DOTween.Sequence();
+            seq.Append(transform.DORotate(rotation, 0.1f));
+            seq.AppendInterval(0.1f);
+            seq.Append(transform.DORotate(defaultRot, 0.1f));
+            seq.Play();
+        }
+
 
     }
 
-       
+    public void Slash()
+    {
+
+
+        Vector3 rotation = Vector3.right * 50f;
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DORotate(rotation, 0.1f));
+        seq.AppendInterval(0.1f);
+        seq.Append(transform.DORotate(defaultRot, 0.1f));
+        seq.Play();
+    }
+
 }
+
+
 
