@@ -5,9 +5,15 @@ public class RayShootTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<RayShooter>(out RayShooter rayShooter))
+
+        RayShooter rayShooter = other.GetComponentInChildren<RayShooter>();
+
+        if (rayShooter != null)
         {
+
             rayShooter.TurnOn();
+            
         }
+
     }
 }

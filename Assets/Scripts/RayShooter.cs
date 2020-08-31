@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(PlayerMovement))]
+
 public class RayShooter : MonoBehaviour
 {
     [SerializeField] private PlayerMovement _playerMovement = null;
     private float _range = 0f;
     private bool isActive = false;
 
-
+    public UnityEvent TurnLeft;
 
 
     void Update()
@@ -24,8 +25,9 @@ public class RayShooter : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Trigger"))
                 {
-                    _playerMovement.TurnLeft();
+                    TurnLeft.Invoke();
                     TurnOff();
+                   
                 }
             }
         }
@@ -45,13 +47,13 @@ public class RayShooter : MonoBehaviour
         switch (_playerMovement.lane)
         {
             case PlayerMovement.Lane.Left:
-                _range = 5f;
+                _range = 7f;
                 break;
             case PlayerMovement.Lane.Mid:
-                _range = 3f;
+                _range = 5f;
                 break;
             case PlayerMovement.Lane.Right:
-                _range = 2f;
+                _range = 5f;
                 break;
             default:
                 break;
