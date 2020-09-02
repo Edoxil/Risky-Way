@@ -13,14 +13,7 @@ public class Edge : MonoBehaviour
 
 
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Slash();
-
-        }
-    }
+   
     public void TurnLeftHandler()
     {
         _forwardAxis = ForwarAxis.Z;

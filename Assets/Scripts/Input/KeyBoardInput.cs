@@ -13,11 +13,11 @@ public class KeyBoardInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            MoveLeft.Invoke();
+            MoveLeft?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            MoveRight.Invoke();
+            MoveRight?.Invoke();
         }
 
     }

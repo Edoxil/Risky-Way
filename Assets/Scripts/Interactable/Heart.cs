@@ -4,12 +4,13 @@ using UnityEngine;
 public class Heart : MonoBehaviour, Iinteractable
 {
     private BoxCollider _boxColider;
-    [SerializeField] private ParticleSystem _particalSystem;
+    [SerializeField] private ParticleSystem _particalSystem = null;
+
     private void Start()
     {
         _boxColider = GetComponent<BoxCollider>();
     }
-        
+
     private void Update()
     {
         Vector3 rot = transform.eulerAngles;
@@ -21,20 +22,16 @@ public class Heart : MonoBehaviour, Iinteractable
 
     public void Interact()
     {
-        Debug.Log("Interact with heart");
-        _boxColider.enabled = false;
         Die();
-        Destroy(gameObject,1f);
-        
     }
 
-  
     private void Die()
     {
+        _boxColider.enabled = false;
         _particalSystem.Play();
         transform.DOMoveY(2.5f, 0.5f);
-        transform.DOShakeScale(0.7f,1f, 10, 1f);
+        transform.DOShakeScale(0.7f, 1f, 10, 1f);
+        Destroy(gameObject, 1f);
     }
+
 }
-
-

@@ -30,13 +30,13 @@ public class SwipeInput : MonoBehaviour
             // Направление  свайпа влево
             if (startTouchPos.x > endTouchPos.x)
             {
-                SwipeLeft.Invoke();
+                SwipeLeft?.Invoke();
             }
 
             // Направление  свайпа вправо
             if (startTouchPos.x < endTouchPos.x)
             {
-                SwipeRight.Invoke();
+                SwipeRight?.Invoke();
             }
         }
     }

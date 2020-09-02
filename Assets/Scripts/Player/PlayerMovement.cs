@@ -4,14 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _speed = 5f;
 
     // Растояние на которое  премещаяется игрок влево/вправо 
     private float _laneWidth = 2f;
 
-
     private CharacterController _characterController;
     private Vector3 _forward = Vector3.zero;
+
+
+    public bool isStoped = false;
 
 
 
@@ -34,12 +36,17 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     private void Start()
     {
+        Debug.Log("Не забыть поменять значения в AlignPosition когда будет получена информация о текущем уровне!!!");
         _characterController = GetComponent<CharacterController>();
     }
+
+
     private void Update()
     {
+        if (isStoped) { return; }
         // Получаем вектор движения вперед  и домножаем его на скорость и дельту времени
         if (_forwardAxis == ForwardAxis.X)
         {
@@ -58,17 +65,22 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    // Поворот на 90 градусов и меняем ось движени вперед, подравниваем позицию в зависимости от пути
+
+    // Поворот на 90 градусов и меняем ось движени вперед
     public void TurnLeftHandler()
     {
+        
 
         Vector3 rot = transform.rotation.eulerAngles;
         rot.y -= 90f;
-        transform.DORotate(rot, 0.5f);
+        transform.DORotate(rot, 0.7f);
         transform.DORestart();
         DOTween.Play(transform);
 
         _forwardAxis = ForwardAxis.Z;
+
+
+        
         AlignPosition();
     }
 
@@ -101,10 +113,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOPlay();
             }
         }
+
+        AlignPosition();
     }
-
-
-
     public void MoveRight()
     {
         if (lane != Lane.Right)
@@ -130,37 +141,73 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+        AlignPosition();
     }
 
 
-    
+    #region EXPEREMENTAL
     private void AlignPosition()
     {
         Vector3 pos = transform.position;
-        Debug.Log("Не забыть поменять значения когда будет получена информация о текущем уровне!!!");
-        if (lane == Lane.Mid)
-        {
-            pos.z = 112f;
-            transform.DOMoveZ(pos.z, 0.2f);
-            transform.DORestart();
-            transform.DOPlay();
-        }
-        if (lane == Lane.Left)
-        {
-            pos.z = 110f;
-            transform.DOMoveZ(pos.z, 0.2f);
-            transform.DORestart();
-            transform.DOPlay();
-        }
-        if (lane == Lane.Right)
-        {
-            pos.z = 114f;
-            transform.DOMoveZ(pos.z, 0.2f);
-            transform.DORestart();
-            transform.DOPlay();
-        }
-    }
+        
 
+        if (_forwardAxis == ForwardAxis.Z)
+        {
+            if (lane == Lane.Mid)
+            {
+
+                pos.z = 112f;
+                transform.DOMoveZ(pos.z, 0.2f);
+                transform.DORestart();
+                transform.DOPlay();
+            }
+            if (lane == Lane.Left)
+            {
+                pos.z = 110f;
+                transform.DOMoveZ(pos.z, 0.2f);
+                transform.DORestart();
+                transform.DOPlay();
+            }
+            if (lane == Lane.Right)
+            {
+                pos.z = 114f;
+                transform.DOMoveZ(pos.z, 0.2f);
+                transform.DORestart();
+                transform.DOPlay();
+            }
+
+            ///////////////////
+            if (_forwardAxis == ForwardAxis.X)
+            {
+                if (lane == Lane.Mid)
+                {
+
+                    pos.x = 0f;
+                    transform.DOMoveX(pos.x, 0.2f);
+                    transform.DORestart();
+                    transform.DOPlay();
+                }
+                if (lane == Lane.Left)
+                {
+                    pos.x = -2f;
+                    transform.DOMoveX(pos.x, 0.2f);
+                    transform.DORestart();
+                    transform.DOPlay();
+                }
+                if (lane == Lane.Right)
+                {
+                    pos.x = 2f;
+                    transform.DOMoveX(pos.x, 0.2f);
+                    transform.DORestart();
+                    transform.DOPlay();
+                }
+
+
+            }
+        }
+
+    }
+    #endregion EXPEREMENTAL
 
     // Меняем полосу движения (если это возможно) 
     private void SwitchLaneLeft()
