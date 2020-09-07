@@ -27,6 +27,7 @@ public class Bomb : MonoBehaviour, Iinteractable
     {
         Die();
     }
+  
     private void Die()
     {
         _boxColider.enabled = false;
@@ -36,5 +37,5 @@ public class Bomb : MonoBehaviour, Iinteractable
         _renderer.enabled = false;
         Destroy(gameObject, 1f);
     }
-
+    
 }

@@ -6,14 +6,7 @@ public class Edge : MonoBehaviour
     private Vector3 _defaultRot;
     private float _cutAngel = 20f;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Slash();
-
-        }
-    }
+ 
 
     public void Slash()
     {
@@ -31,4 +24,3 @@ public class Edge : MonoBehaviour
         seq.Play();
     }
 }
-

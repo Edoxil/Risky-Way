@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class PlayersReact : MonoBehaviour
+public class PlayerReaction : MonoBehaviour
 {
     [SerializeField] private PlayerMovement _playerMovement = null;
     private Renderer _renderer;
@@ -11,15 +11,37 @@ public class PlayersReact : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
-  
-    public void ReturnToCheckPoint()
+    public void ReactionFor(Iinteractable obstacle)
+    {
+        if (obstacle.GetType().Equals(typeof(Bomb)))
+        {
+            TakeDamage();
+        }
+        if (obstacle.GetType().Equals(typeof(Heart)))
+        {
+            Debug.Log("Heart");
+        }
+        if (obstacle.GetType().Equals(typeof(MetalCrate)))
+        {
+            TakeDamage();
+        }
+    }
+
+    public void VerticalCollision()
     {
         TakeDamage();
-        _playerMovement.isStoped = true;
-        _playerMovement.transform.DOMove(new Vector3(0.1f, 1.5f, 0f), 1f);
-
+        ReturnToCheckPoint();
     }
-    public void TakeDamage()
+
+    private void ReturnToCheckPoint()
+    {
+        _playerMovement.isStoped = true;
+        _playerMovement.transform.DOMove(new Vector3(0f, 1.5f, 0f), 1f);
+        _playerMovement.lane = PlayerMovement.Lane.Mid;
+    }
+
+
+    private void TakeDamage()
     {
 
         Blinking();
@@ -50,9 +72,6 @@ public class PlayersReact : MonoBehaviour
     }
     private void BlinkingFinished()
     {
-
         _renderer.material.shader = Shader.Find("Mobile/Diffuse");
-
     }
-
 }

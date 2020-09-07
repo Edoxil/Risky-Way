@@ -18,8 +18,8 @@ public class CrateWall : MonoBehaviour
             _crates.Add(body.GetComponent<Crate>());
         }
 
-        transform.DetachChildren();
     }
+        
 
     public void ExplodeHandler()
     {
