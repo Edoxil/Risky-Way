@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 
 public class PlayersReact : MonoBehaviour
@@ -12,20 +11,13 @@ public class PlayersReact : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage();
-
-        }
-    }
+  
     public void ReturnToCheckPoint()
     {
         TakeDamage();
         _playerMovement.isStoped = true;
         _playerMovement.transform.DOMove(new Vector3(0.1f, 1.5f, 0f), 1f);
-       
+
     }
     public void TakeDamage()
     {
@@ -33,7 +25,7 @@ public class PlayersReact : MonoBehaviour
         Blinking();
     }
 
-        
+
 
     private void Blinking()
     {
@@ -45,34 +37,22 @@ public class PlayersReact : MonoBehaviour
         transparent.a = 0.25f;
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(_renderer.material.DOColor(transparent, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(normal, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(transparent, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(normal, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(transparent, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(normal, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(transparent, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(normal, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(transparent, 0.1f));
-        seq.AppendInterval(0.1f);
-        seq.Join(_renderer.material.DOColor(normal, 0.1f));
-        seq.Play();
 
-        StartCoroutine(WaitForBlinkingFinished(seq));
+        seq.onComplete += BlinkingFinished;
+        for (int i = 0; i < 5; i++)
+        {
+            seq.Append(_renderer.material.DOColor(transparent, 0.1f));
+            seq.AppendInterval(0.1f);
+            seq.Join(_renderer.material.DOColor(normal, 0.1f));
+            seq.AppendInterval(0.1f);
+        }
+        seq.Play();
     }
-    private IEnumerator WaitForBlinkingFinished(Sequence sequence)
+    private void BlinkingFinished()
     {
-        yield return sequence.WaitForCompletion();
+
         _renderer.material.shader = Shader.Find("Mobile/Diffuse");
-        StopAllCoroutines();
+
     }
 
 }
