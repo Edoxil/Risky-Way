@@ -27,10 +27,11 @@ public class Detector : MonoBehaviour
         }
 
 
-        
+
         ray = new Ray(transform.position, Vector3.forward);
         if (Physics.Raycast(ray, out hit, 1f))
         {
+
             if (hit.transform.CompareTag("Vertical Obstacle"))
             {
                 _reaction.VerticalCollision();
@@ -38,4 +39,3 @@ public class Detector : MonoBehaviour
         }
     }
 }
-               

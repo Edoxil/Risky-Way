@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trigger
   - Vertical Obstacle
+  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -7,19 +7,21 @@ public class CrateWall : MonoBehaviour
 
     [SerializeField] private Rigidbody[] _cratesBodies = null;
     [SerializeField] private List<Crate> _crates = null;
-
+    private PlayerResurces _playerResurses = null;
 
 
     private void Start()
     {
+        _playerResurses = (PlayerResurces)FindObjectOfType(typeof(PlayerResurces));
         _crates = new List<Crate>();
         foreach (Rigidbody body in _cratesBodies)
         {
             _crates.Add(body.GetComponent<Crate>());
         }
-
-    }
         
+    }
+
+
 
     public void ExplodeHandler()
     {
@@ -32,6 +34,7 @@ public class CrateWall : MonoBehaviour
             body.isKinematic = false;
             body.AddForceAtPosition(Vector3.up * 15f, pos, ForceMode.Impulse);
         }
+        _playerResurses?.MultiCoinColected(_crates.Count);
 
         StartCoroutine(DestroyCrates());
 

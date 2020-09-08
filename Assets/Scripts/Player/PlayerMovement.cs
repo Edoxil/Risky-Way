@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public Lane lane = Lane.Mid;
 
     // Ось по которой происходит движение вперед
-    private DirectionAxis _forwardAxis = DirectionAxis.X;
+    private DirectionAxis _directionAxis = DirectionAxis.X;
 
     public enum Lane
     {
@@ -49,18 +49,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isStoped) { return; }
         // Получаем вектор движения вперед  и домножаем его на скорость и дельту времени
-        if (_forwardAxis == DirectionAxis.X)
+        if (_directionAxis == DirectionAxis.X)
         {
             _forward = Vector3.forward;
             _forward *= _speed * Time.deltaTime;
         }
-        else if (_forwardAxis == DirectionAxis.Z)
+        else if (_directionAxis == DirectionAxis.Z)
         {
             _forward = Vector3.left;
             _forward *= _speed * Time.deltaTime;
         }
 
         // Перемещаем игрока вперед каждый кадр
+       
         _characterController.Move(_forward);
     }
 
@@ -76,9 +77,9 @@ public class PlayerMovement : MonoBehaviour
         rot.y -= 90f;
         transform.DORotate(rot, 0.5f);
         transform.DORestart();
-        DOTween.Play(transform);
+        transform.DOPlay();
 
-        _forwardAxis = DirectionAxis.Z;
+        _directionAxis = DirectionAxis.Z;
 
         AlignPosition();
     }
@@ -86,13 +87,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 pos = new Vector3(0f, 1.5f, 0f);
         Quaternion rot = Quaternion.Euler(0, 0, 0);
-        transform.SetPositionAndRotation(pos, rot);
+        transform.DOMove(pos, 0f);
     }
 
-    public void StartMoving()
-    {
-        isStoped = false;
-    }
+   
 
 
 
@@ -100,12 +98,14 @@ public class PlayerMovement : MonoBehaviour
     // Движени влево/вправо в зависимости от оси движения вперед
     public void MoveLeft()
     {
+        if (isStoped) { return; }
+
         if (lane != Lane.Left)
         {
             Vector3 pos = transform.position;
 
 
-            if (_forwardAxis == DirectionAxis.X)
+            if (_directionAxis == DirectionAxis.X)
             {
 
                 SwitchLaneLeft();
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.DORestart();
                 transform.DOPlay();
             }
-            else if (_forwardAxis == DirectionAxis.Z)
+            else if (_directionAxis == DirectionAxis.Z)
             {
                 SwitchLaneLeft();
                 pos.z -= _laneWidth;
@@ -128,11 +128,13 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveRight()
     {
+        if (isStoped) { return; }
+
         if (lane != Lane.Right)
         {
             Vector3 right = transform.position;
 
-            if (_forwardAxis == DirectionAxis.X)
+            if (_directionAxis == DirectionAxis.X)
             {
 
                 SwitchLaneRight();
@@ -141,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.DORestart();
                 transform.DOPlay();
             }
-            else if (_forwardAxis == DirectionAxis.Z)
+            else if (_directionAxis == DirectionAxis.Z)
             {
                 SwitchLaneRight();
                 right.z += _laneWidth;
@@ -159,9 +161,10 @@ public class PlayerMovement : MonoBehaviour
     private void AlignPosition()
     {
         Vector3 pos = transform.position;
+        
+        
 
-
-        if (_forwardAxis == DirectionAxis.Z)
+        if (_directionAxis == DirectionAxis.Z)
         {
             if (lane == Lane.Mid)
             {

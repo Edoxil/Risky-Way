@@ -3,6 +3,7 @@
 public class Crate : MonoBehaviour, Iinteractable
 {
     [SerializeField] private GameObject _destoyedPrefab = null;
+    [SerializeField] private Coin _coin = null;
 
     private float _randX;
     private float _randY;
@@ -20,8 +21,10 @@ public class Crate : MonoBehaviour, Iinteractable
 
         Vector3 randRot = new Vector3(_randX, _randY, 0f);
         Vector3 pos = transform.position;
-
+        transform.DetachChildren();
+        _coin.Interact();
         Instantiate(_destoyedPrefab, pos, Quaternion.Euler(randRot));
+
         Destroy(gameObject);
     }
 
