@@ -1,26 +1,28 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-
+    [SerializeField] private float _speed = 8f;
     // Растояние на которое  премещаяется игрок влево/вправо 
     private float _laneWidth = 2f;
-
-    private CharacterController _characterController;
+    [SerializeField] private NavMeshAgent _agent;
     private Vector3 _forward = Vector3.zero;
 
 
     public bool isStoped = false;
 
+    [SerializeField] private GamePlayUI _gamePlayeUI = null;
+    private Vector3 _finish = Vector3.zero;
+
     public UnityEvent Turning;
+
 
     // Текущая полоса, на которой находится игрок
     public Lane lane = Lane.Mid;
-
     // Ось по которой происходит движение вперед
     private DirectionAxis _directionAxis = DirectionAxis.X;
 
@@ -38,11 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private void Start()
-    {
-        Debug.Log("Не забыть поменять значения в AlignPosition когда будет получена информация о текущем уровне!!!");
-        _characterController = GetComponent<CharacterController>();
-    }
+
 
 
     private void Update()
@@ -61,11 +59,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Перемещаем игрока вперед каждый кадр
-       
-        _characterController.Move(_forward);
+        _agent.Move(_forward);
     }
 
 
+    private void FixedUpdate()
+    {
+        if (isStoped) { return; }
+        float distance = Vector3.Distance(transform.position, _finish);
+
+
+        if (distance > 0)
+        {
+            _gamePlayeUI.SetProgressBarValue(distance);
+        }
+
+    }
 
 
     // Поворот на 90 градусов и меняем ось движени вперед
@@ -83,14 +92,24 @@ public class PlayerMovement : MonoBehaviour
 
         AlignPosition();
     }
-    public void SetDefoultPosition()
+    public void GameStartedHandler()
     {
+
+        _agent.enabled = false;
         Vector3 pos = new Vector3(0f, 1.5f, 0f);
         Quaternion rot = Quaternion.Euler(0, 0, 0);
-        transform.DOMove(pos, 0f);
+        transform.position = pos;
+        transform.rotation = rot;
+        _agent.enabled = true;
     }
 
-   
+
+    public void SetFinish(Vector3 finish)
+    {
+        _finish = finish;
+    }
+
+
 
 
 
@@ -161,8 +180,7 @@ public class PlayerMovement : MonoBehaviour
     private void AlignPosition()
     {
         Vector3 pos = transform.position;
-        
-        
+
 
         if (_directionAxis == DirectionAxis.Z)
         {
@@ -188,14 +206,10 @@ public class PlayerMovement : MonoBehaviour
                 transform.DORestart();
                 transform.DOPlay();
             }
-
-
-
-
-
         }
 
     }
+
     #endregion EXPEREMENTAL
 
     // Меняем полосу движения (если это возможно) 

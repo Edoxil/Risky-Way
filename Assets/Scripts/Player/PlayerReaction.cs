@@ -2,12 +2,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerReaction : MonoBehaviour
 {
     [SerializeField] private PlayerMovement _playerMovement = null;
     private CameraManager _cameraManager = null;
-    private Renderer _renderer;
+    private Renderer _renderer = null;
+    private Detector _detector = null;
     private Transform _player = null;
+    private Vector3 _checkPoint = Vector3.zero;
 
     // Эвенты для обновления ресуров игрока
     public UnityEvent CoinColected;
@@ -17,10 +20,12 @@ public class PlayerReaction : MonoBehaviour
 
     private void Start()
     {
+        _detector = GetComponentInChildren<Detector>();
         _cameraManager = CameraManager.GetInstance();
         _renderer = GetComponent<Renderer>();
     }
 
+ 
     // Обработка реакции на разные объекты на сцене и вызов нужного события в зависимости от типа объекта
     public void ReactionFor(Iinteractable obj)
     {
@@ -44,7 +49,7 @@ public class PlayerReaction : MonoBehaviour
 
     }
 
-    // Обработка столкновения с вертикальным объектом (по тагу "Vertical Obstacle")
+    // Обработка столкновения с вертикальным объектом 
     public void VerticalCollision()
     {
         TakeDamage();
@@ -55,11 +60,20 @@ public class PlayerReaction : MonoBehaviour
     private void ReturnToCheckPoint()
     {
         _playerMovement.isStoped = true;
-        _playerMovement.transform.DOMove(new Vector3(0f, 1.5f, 0f), 1f)
-            .onComplete += () => { _playerMovement.isStoped = false; };
-
+        _detector.enabled = false;
+        
+        _playerMovement.transform.DOMove(_checkPoint, 1f)
+            .onComplete += () =>
+            {
+                _detector.enabled = true;
+                _playerMovement.isStoped = false;
+            };
         _playerMovement.lane = PlayerMovement.Lane.Mid;
     }
+                
+
+
+
 
     // Отправляем событие о получении урона в PlayerResurces и анимация мигания ножа
     private void TakeDamage()
@@ -105,5 +119,16 @@ public class PlayerReaction : MonoBehaviour
         seq.AppendInterval(0.3f);
         seq.Append(_player.DOMoveY(Vector3.down.y * 5f, 1f));
         seq.Play();
+    }
+
+    public void SetCheckPoint(Vector3 checkpoint)
+    {
+        checkpoint.y = 1.5f;
+        _checkPoint = checkpoint;
+    }
+       
+    public void GameStartHandler()
+    {
+        _checkPoint = new Vector3(0f, 1.5f, 0f);
     }
 }

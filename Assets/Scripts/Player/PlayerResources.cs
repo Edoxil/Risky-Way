@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerResurces : MonoBehaviour
+public class PlayerResources : MonoBehaviour
 {
     // Ссылка на UI для передачи данных и дальнейшего обновления UI
     [SerializeField] private GamePlayUI _gamePlayUI = null;
@@ -14,12 +14,17 @@ public class PlayerResurces : MonoBehaviour
 
     public UnityEvent PlayerDied;
 
-    private void Start()
+    private void Awake()
     {
         LivesChanged += _gamePlayUI.LivesChangedHandler;
         CoinsChanged += _gamePlayUI.CoinsChangedHandler;
     }
-        
+    private void OnDisable()
+    {
+        LivesChanged -= _gamePlayUI.LivesChangedHandler;
+        CoinsChanged -= _gamePlayUI.CoinsChangedHandler;
+    }
+
 
 
     // Обрабатываем событие начала игры полученое от GameManager'a, устанавливаем значения по-умочанию

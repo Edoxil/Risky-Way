@@ -26,10 +26,11 @@ public class GameManager : MonoBehaviour
     }
     #endregion Singleton
 
-    
-    public List<LevelData> Levels; // Список информации об уровнях
 
-    // Префаб объекта в котором создается уровень (путь, препятствия,поверапы)
+    public List<LevelData> Levels; // Список информации об уровнях
+    public LevelData currentLevel;
+
+    // Префаб объекта в котором создается уровень (путь, препятствия,паверапы)
     [SerializeField] private GameObject _levelCreatorPrefab = null;
     private GameObject _levelCreator = null;
 
@@ -38,20 +39,18 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent Started;
     public UnityEvent Finished;
-    
+
 
     private void Start()
     {
         // TMP
         PlayerPrefs.SetInt("level", 0);
-        
 
         _cameraManager = CameraManager.GetInstance();
-        _levelCreator = Instantiate(_levelCreatorPrefab, transform.position, Quaternion.identity);
-        _playerMovement.isStoped = true;
-        _playerMovement.SetDefoultPosition();
-        Started?.Invoke();
+
+        Initialize();
     }
+
 
 
 
@@ -66,26 +65,19 @@ public class GameManager : MonoBehaviour
         Transform target = _playerMovement.GetComponent<Transform>();
         _cameraManager.StartFolowing(target);
 
-        PlayerPrefs.SetInt("lives", 3);
-        Destroy(_levelCreator);
-        _levelCreator = Instantiate(_levelCreatorPrefab, transform.position, Quaternion.identity);
-        _playerMovement.isStoped = true;
-        _playerMovement.SetDefoultPosition();
-        Started?.Invoke();
+        Initialize();
     }
 
-  
+
     public void NextLevel()
     {
         int currentLevel = PlayerPrefs.GetInt("level");
         currentLevel++;
         PlayerPrefs.SetInt("level", currentLevel);
-        Destroy(_levelCreator);
-        _levelCreator = Instantiate(_levelCreatorPrefab, transform.position, Quaternion.identity);
-        _playerMovement.isStoped = true;
-        _playerMovement.SetDefoultPosition();
-        Started?.Invoke();
+
+        Initialize();
     }
+
 
     // Вызываем событие на финеше и показываем Win Screen
     public void Finish()
@@ -93,4 +85,22 @@ public class GameManager : MonoBehaviour
         _playerMovement.isStoped = true;
         Finished?.Invoke();
     }
-} 
+
+
+    private void Initialize()
+    {
+        int currentLevel = PlayerPrefs.GetInt("level");
+        LevelData data = Levels[currentLevel];
+
+        PlayerPrefs.SetInt("lives", 3);
+        if (_levelCreator != null)
+        {
+            Destroy(_levelCreator);
+        }
+        _levelCreator = Instantiate(_levelCreatorPrefab, transform.position, Quaternion.identity);
+        _playerMovement.isStoped = true;
+        _playerMovement.SetFinish(data.finish);
+        Started?.Invoke();
+    }
+}
+

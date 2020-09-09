@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 96608b19c0f18f34fac2bc2888f6707d, type: 2}
 --- !u!1 &60273219
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,8 +276,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Levels:
-  - {fileID: 11400000, guid: 20ae14c82327fa24ab6e2786f51dd516, type: 2}
-  - {fileID: 11400000, guid: 02a62b899b911dc4da4bca68c63ff746, type: 2}
+  - {fileID: 11400000, guid: 3948e546e645544438ad9de305c5fa63, type: 2}
+  - {fileID: 11400000, guid: 9454c3ba46c46c445a72e92e8a10982d, type: 2}
+  currentLevel: {fileID: 0}
   _levelCreatorPrefab: {fileID: 7368615546023277653, guid: 6d16f96fe01ab724e812946a3e1f199a,
     type: 3}
   _playerMovement: {fileID: 414641720}
@@ -297,6 +298,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 414641722}
         m_MethodName: GameStartedHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 414641720}
+        m_MethodName: GameStartedHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 934164186}
+        m_MethodName: GameStartHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -948,10 +971,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 287561113}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -1000
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: -1000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -964,9 +987,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 414641719}
-  - component: {fileID: 414641721}
   - component: {fileID: 414641720}
   - component: {fileID: 414641722}
+  - component: {fileID: 414641721}
+  - component: {fileID: 414641723}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1002,7 +1026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 8
+  _agent: {fileID: 414641721}
   isStoped: 1
+  _gamePlayeUI: {fileID: 1398103902}
   Turning:
     m_PersistentCalls:
       m_Calls:
@@ -1018,24 +1044,28 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   lane: 1
---- !u!143 &414641721
-CharacterController:
+--- !u!195 &414641721
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414641718}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 0.5
+  m_AgentTypeID: 0
   m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.1, z: 3}
+  m_Speed: 0
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 1.2
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &414641722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,6 +1104,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!143 &414641723
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414641718}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.5
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 3}
 --- !u!1 &463392469
 GameObject:
   m_ObjectHideFlags: 0
@@ -3086,7 +3134,7 @@ MonoBehaviour:
   _coinsCount: {fileID: 1983485452}
   _curentLevel: {fileID: 939451785}
   _nextLevel: {fileID: 942826438}
-  _slider: {fileID: 382236609}
+  _progressBar: {fileID: 382236609}
 --- !u!1 &1584301483
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,6 +3604,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 03f78fd4620e1744ea5c996d1377ecda,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f78fd4620e1744ea5c996d1377ecda, type: 3}

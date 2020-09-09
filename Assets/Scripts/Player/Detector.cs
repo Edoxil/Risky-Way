@@ -16,6 +16,7 @@ public class Detector : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
 
+       
         if (Physics.Raycast(ray, out hit, 2f))
         {
             if (hit.transform.TryGetComponent(out Iinteractable interatable))
@@ -29,10 +30,10 @@ public class Detector : MonoBehaviour
 
 
         ray = new Ray(transform.position, Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 0.9f))
         {
 
-            if (hit.transform.CompareTag("Vertical Obstacle"))
+            if (hit.transform.TryGetComponent(out Iinteractable _))
             {
                 _reaction.VerticalCollision();
             }

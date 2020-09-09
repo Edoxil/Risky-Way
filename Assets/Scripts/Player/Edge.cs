@@ -6,14 +6,14 @@ public class Edge : MonoBehaviour
     private Vector3 _defaultRot;
     private float _cutAngel = 20f;
 
- 
+
 
     public void Slash()
     {
         Vector3 rotation = Vector3.zero;
 
 
-        _defaultRot = transform.eulerAngles;
+        _defaultRot = transform.localEulerAngles;
         rotation = Vector3.right * _cutAngel;
 
 

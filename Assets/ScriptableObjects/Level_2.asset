@@ -16,12 +16,12 @@ MonoBehaviour:
   pathPrefab: {fileID: 6252244655777210756, guid: 7023408422a8daf4d8e2d937bd7d224e,
     type: 3}
   type: 1
-  obstaclesPrefabs:
+  ObstaclesPrefabs:
   - {fileID: 1015381856817936379, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
   - {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e, type: 3}
   - {fileID: 2678593160829669789, guid: 2358e7a73bfca1746853cebc9475a202, type: 3}
   - {fileID: 127481529951566369, guid: ba1aed0b2a20d51489973022b0599a28, type: 3}
   - {fileID: 4663609476042912258, guid: 9fd0133ccb948d341ad2bac552640d45, type: 3}
-  powerUpPrefabs:
+  PowerUpPrefabs:
   - {fileID: 5703248125770081331, guid: 70178d188e9c9bf44a03c24d3f534420, type: 3}
-  - {fileID: 3652594745824207777, guid: 2a60ff64bb1900044940fffdab8be139, type: 3}
+  finish: {x: -98.5, y: 1.5, z: 103}

@@ -7,12 +7,12 @@ public class CrateWall : MonoBehaviour
 
     [SerializeField] private Rigidbody[] _cratesBodies = null;
     [SerializeField] private List<Crate> _crates = null;
-    private PlayerResurces _playerResurses = null;
+    private PlayerResources _playerResurses = null;
 
 
     private void Start()
     {
-        _playerResurses = (PlayerResurces)FindObjectOfType(typeof(PlayerResurces));
+        _playerResurses = (PlayerResources)FindObjectOfType(typeof(PlayerResources));
         _crates = new List<Crate>();
         foreach (Rigidbody body in _cratesBodies)
         {
