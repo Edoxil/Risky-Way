@@ -7,21 +7,19 @@ public class LevelCreator : MonoBehaviour
     private GameObject _pathPrefab = null;
     private GameManager _gameManager = null;
     private LevelData _levelData = null;
-    private int _currentLevel => PlayerPrefs.GetInt("level", 0);
+  
 
     
-    void Start()
+    void Awake()
     {
         _gameManager = GameManager.GetInstance();
         _generator = GetComponent<ObjectsGenerator>();
-        _levelData = _gameManager.Levels[_currentLevel];
-
+      
+        _levelData = _gameManager._levelData;
         _pathPrefab = _levelData.pathPrefab;
 
-
-
         Instantiate(_pathPrefab, transform.position, Quaternion.identity, transform);
-        _generator.Generate(_levelData.ObstaclesPrefabs);
+        _generator.Generate(_levelData);
     }
    
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Edge : MonoBehaviour
 {
-    private Vector3 _defaultRot;
+    private Vector3 _defaultRot = Vector3.zero;
     private float _cutAngel = 20f;
 
 
@@ -11,9 +11,6 @@ public class Edge : MonoBehaviour
     public void Slash()
     {
         Vector3 rotation = Vector3.zero;
-
-
-        _defaultRot = transform.localEulerAngles;
         rotation = Vector3.right * _cutAngel;
 
 
@@ -23,4 +20,4 @@ public class Edge : MonoBehaviour
         seq.Append(transform.DOLocalRotate(_defaultRot, 0.1f));
         seq.Play();
     }
-}
+}      

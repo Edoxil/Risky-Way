@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour, Iinteractable
     [SerializeField] private ParticleSystem _explosion = null;
     private BoxCollider _boxColider;
     private Renderer _renderer;
+    private float _rotSpeed = 2f;
 
     public UnityEvent Explode;
 
@@ -17,8 +18,9 @@ public class Bomb : MonoBehaviour, Iinteractable
     }
     private void Update()
     {
-        Vector3 rot = transform.eulerAngles;
-        rot.y += 2f;
+        if (transform == null) { return; }
+        Vector3 rot = transform.localEulerAngles;
+        rot.y += _rotSpeed;
         transform.DOLocalRotate(rot, 0.1f);
     }
 
@@ -27,7 +29,7 @@ public class Bomb : MonoBehaviour, Iinteractable
     {
         Die();
     }
-  
+
     private void Die()
     {
         _boxColider.enabled = false;
@@ -35,7 +37,8 @@ public class Bomb : MonoBehaviour, Iinteractable
         Explode?.Invoke();
         _explosion.Play();
         _renderer.enabled = false;
+
         Destroy(gameObject, 1f);
     }
-    
+
 }

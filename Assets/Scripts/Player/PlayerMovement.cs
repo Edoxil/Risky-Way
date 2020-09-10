@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _forward = Vector3.zero;
 
 
-    public bool isStoped = false;
+    public bool isStoped = true;
 
     [SerializeField] private GamePlayUI _gamePlayeUI = null;
     private Vector3 _finish = Vector3.zero;
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (isStoped) { return; }
         float distance = Vector3.Distance(transform.position, _finish);
@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
     // Поворот на 90 градусов и меняем ось движени вперед
     public void TurnLeft()
     {
-
         Turning?.Invoke();
         Vector3 rot = transform.rotation.eulerAngles;
         rot.y -= 90f;
@@ -92,16 +91,28 @@ public class PlayerMovement : MonoBehaviour
 
         AlignPosition();
     }
+
     public void GameStartedHandler()
     {
+        isStoped = true;
 
-        _agent.enabled = false;
-        Vector3 pos = new Vector3(0f, 1.5f, 0f);
+        Vector3 pos = new Vector3(0f, 1.5f, 0.5f);
         Quaternion rot = Quaternion.Euler(0, 0, 0);
-        transform.position = pos;
-        transform.rotation = rot;
+        transform.DOMove(pos, 0.3f);
+        transform.DORotateQuaternion(rot, 0.1f);
+
+        _directionAxis = DirectionAxis.X;
+        lane = Lane.Mid;
+
         _agent.enabled = true;
+        _agent.Warp(pos);
     }
+        
+       
+       
+
+
+
 
 
     public void SetFinish(Vector3 finish)

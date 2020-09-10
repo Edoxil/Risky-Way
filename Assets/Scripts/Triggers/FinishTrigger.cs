@@ -9,10 +9,12 @@ public class FinishTrigger : MonoBehaviour
     {
         _gameManager = GameManager.GetInstance();
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent(out PlayerMovement playerMovement))
         {
+            playerMovement.isStoped = true;
             _confetti.Play();
             _gameManager.Finish();
         }

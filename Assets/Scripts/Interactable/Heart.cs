@@ -5,6 +5,7 @@ public class Heart : MonoBehaviour, Iinteractable
 {
     private BoxCollider _boxColider;
     [SerializeField] private ParticleSystem _particalSystem = null;
+    private float _rotSpeed = 2f;
 
     private void Start()
     {
@@ -13,8 +14,9 @@ public class Heart : MonoBehaviour, Iinteractable
 
     private void Update()
     {
+        if (transform == null) { return; }
         Vector3 rot = transform.eulerAngles;
-        rot.y += 2f;
+        rot.y += _rotSpeed;
 
         transform.DOLocalRotate(rot, 0.1f);
     }
@@ -35,3 +37,4 @@ public class Heart : MonoBehaviour, Iinteractable
     }
 
 }
+        

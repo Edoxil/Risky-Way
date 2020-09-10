@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyableCrate : MonoBehaviour
 {
@@ -9,7 +8,5 @@ public class DestroyableCrate : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, _delay);
-        
     }
-       
 }

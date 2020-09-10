@@ -15,11 +15,19 @@ public class FadeScreen : MonoBehaviour
 
     public void Show()
     {
-        _canvasGroup.DOFade(1f, 0.5f).onComplete += FadeComplete;
+        if (_canvas.enabled == false)
+        {
+            _canvasGroup.DOFade(1f, 0.5f).onComplete += FadeComplete;
+        }
+
     }
     public void Hide()
     {
-        _canvasGroup.DOFade(0f, 0.5f).onComplete += FadeComplete;
+        if (_canvas.enabled == true)
+        {
+            _canvasGroup.DOFade(0f, 0.5f).onComplete += FadeComplete;
+        }
+
     }
 
     private void FadeComplete()

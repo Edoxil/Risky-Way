@@ -1,24 +1,10 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class MetalCrate : MonoBehaviour, Iinteractable
 {
-    private BoxCollider _boxColider;
-
-
-    private void Start()
-    {
-        _boxColider = GetComponent<BoxCollider>();
-    }
     public void Interact()
     {
-        _boxColider.enabled = false;
-        StartCoroutine(Cooldown());
-    }
-    private IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(3f);
-        _boxColider.enabled = true;
-        StopAllCoroutines();
+        transform.DOShakeRotation(0.2f, 5f, 3);
     }
 }

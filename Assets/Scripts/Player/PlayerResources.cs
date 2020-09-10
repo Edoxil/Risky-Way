@@ -7,6 +7,11 @@ public class PlayerResources : MonoBehaviour
     [SerializeField] private GamePlayUI _gamePlayUI = null;
     private int _coins = 0;
     private int _lives = 3;
+    public int GetLives()
+    {
+        return _lives;
+    }
+
 
     private delegate void Changed(int value);
     private event Changed LivesChanged;
@@ -31,7 +36,7 @@ public class PlayerResources : MonoBehaviour
     public void GameStartedHandler()
     {
         _coins = PlayerPrefs.GetInt("coins", 0);
-        _lives = 3;
+        _lives = PlayerPrefs.GetInt("lives", 3); ;
     }
 
     // Обработка получения сразу множества койнов и дальнейшего обновления UI
