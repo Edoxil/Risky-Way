@@ -9,6 +9,7 @@ public class DirLight : MonoBehaviour
         Vector3 rot = new Vector3(-315f, -130f, 0f);
         transform.DORotate(rot, 2f);
     }
+    // Возвращаем свет в стартовое положение
     public void GameStartHandler()
     {
         Vector3 rot = new Vector3(50f, -45f, 0f);

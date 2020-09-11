@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 8f;
     // Растояние на которое  премещаяется игрок влево/вправо 
     private float _laneWidth = 2f;
-    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private NavMeshAgent _agent=null;
     private Vector3 _forward = Vector3.zero;
 
 
@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (isStoped) { return; }
+
         // Получаем вектор движения вперед  и домножаем его на скорость и дельту времени
         if (_directionAxis == DirectionAxis.X)
         {
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (isStoped) { return; }
         float distance = Vector3.Distance(transform.position, _finish);
 
-
+        // Обновление прогресс бара 
         if (distance > 0)
         {
             _gamePlayeUI.SetProgressBarValue(distance);
@@ -92,37 +93,36 @@ public class PlayerMovement : MonoBehaviour
         AlignPosition();
     }
 
+
+    // Обработка события начала игры 
     public void GameStartedHandler()
     {
-        isStoped = true;
 
+        isStoped = true;
         Vector3 pos = new Vector3(0f, 1.5f, 0.5f);
         Quaternion rot = Quaternion.Euler(0, 0, 0);
-        transform.DOMove(pos, 0.3f);
-        transform.DORotateQuaternion(rot, 0.1f);
 
-        _directionAxis = DirectionAxis.X;
-        lane = Lane.Mid;
-
-        _agent.enabled = true;
-        _agent.Warp(pos);
+        Sequence seq = DOTween.Sequence();
+        seq.onComplete += () =>
+        {
+            _directionAxis = DirectionAxis.X;
+            lane = Lane.Mid;
+            _agent.enabled = true;
+            _agent.Warp(pos);
+        };
+        seq.AppendInterval(0.3f);
+        seq.Append(transform.DOMove(pos, 0.0f));
+        seq.Append(transform.DORotateQuaternion(rot, 0.0f));
+        seq.Play();
     }
-        
+
        
-       
-
-
-
-
-
     public void SetFinish(Vector3 finish)
     {
         _finish = finish;
     }
 
-
-
-
+        
 
 
     // Движени влево/вправо в зависимости от оси движения вперед
@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    #region EXPEREMENTAL
+   
     private void AlignPosition()
     {
         Vector3 pos = transform.position;
@@ -221,7 +221,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    #endregion EXPEREMENTAL
 
     // Меняем полосу движения (если это возможно) 
     private void SwitchLaneLeft()

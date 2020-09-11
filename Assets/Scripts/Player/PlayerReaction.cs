@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class PlayerReaction : MonoBehaviour
 {
     [SerializeField] private PlayerMovement _playerMovement = null;
+    [SerializeField] private SwipeInput _input = null;
     private CameraManager _cameraManager = null;
     private Renderer _renderer = null;
     private Detector _detector = null;
@@ -45,22 +46,31 @@ public class PlayerReaction : MonoBehaviour
             CoinColected?.Invoke();
             return;
         }
-        // Если объект не относится к безопасным типам то наносится урон
-        TakeDamage();
 
+        // Если объект не относится к безопасным типам то наносится урон
+        if (obj.GetType().Equals(typeof(Fire)))
+        {
+            FireReaction();
+            TakeDamage();
+            return;
+        }
+
+        Blinking();
+        TakeDamage();
     }
 
     // Обработка столкновения с вертикальным объектом 
     public void VerticalCollision()
     {
         TakeDamage();
+        Blinking();
         int lives = GetComponentInParent<PlayerResources>().GetLives();
         if (lives >= 1)
         {
             ReturnToCheckPoint();
         }
     }
-     
+
 
 
     // Возврат к последниму чекпоинту либо на старт 
@@ -68,12 +78,13 @@ public class PlayerReaction : MonoBehaviour
     {
         _playerMovement.enabled = false;
         _detector.enabled = false;
-
+        _input.enabled = false;
         _playerMovement.transform.DOMove(_checkPoint, 1f)
             .onComplete += () =>
             {
                 _detector.enabled = true;
                 _playerMovement.enabled = true;
+                _input.enabled = true;
             };
         _playerMovement.lane = PlayerMovement.Lane.Mid;
     }
@@ -82,12 +93,13 @@ public class PlayerReaction : MonoBehaviour
 
 
 
-    // Отправляем событие о получении урона в PlayerResurces и анимация мигания ножа
+    // Отправляем событие о получении урона в PlayerResurces 
     private void TakeDamage()
     {
         DamageTaken?.Invoke();
-        Blinking();
     }
+
+    // Мигание ножа
     private void Blinking()
     {
         _renderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
@@ -99,7 +111,7 @@ public class PlayerReaction : MonoBehaviour
 
         Sequence seq = DOTween.Sequence();
 
-        seq.onComplete += BlinkingFinished;
+        seq.onComplete += SetDefoultShader;
         for (int i = 0; i < 3; i++)
         {
             seq.Append(_renderer.material.DOColor(transparent, 0.1f));
@@ -110,10 +122,27 @@ public class PlayerReaction : MonoBehaviour
         seq.Play();
 
     }
-    private void BlinkingFinished()
+    // Делаем нож красным
+    private void FireReaction()
+    {
+        _renderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+        Color normal = Color.white;
+        Color red = Color.red;
+
+        Sequence seq = DOTween.Sequence();
+        seq.onComplete += SetDefoultShader;
+        seq.Append(_renderer.material.DOColor(red, 0.5f));
+        seq.AppendInterval(0.3f);
+        seq.Append(_renderer.material.DOColor(normal, 0.5f));
+        seq.Play();
+    }
+    private void SetDefoultShader()
     {
         _renderer.material.shader = Shader.Find("Mobile/Diffuse");
+
     }
+
+
 
 
     // Реакция на смерть игрока. Останавливаем следование камеры и отправляем нож за пределы пути
@@ -125,7 +154,7 @@ public class PlayerReaction : MonoBehaviour
         _playerMovement.isStoped = true;
         _detector.enabled = false;
         agent.enabled = false;
-        
+
         Sequence seq = DOTween.Sequence();
         seq.onComplete += () => { _detector.enabled = true; };
 
@@ -136,19 +165,6 @@ public class PlayerReaction : MonoBehaviour
         seq.Append(player.DOLocalMoveY(-8f, 0.5f));
         seq.Play();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void SetCheckPoint(Vector3 checkpoint)
     {
         checkpoint.y = 1.5f;

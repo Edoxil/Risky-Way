@@ -17,11 +17,12 @@ public class Detector : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
 
-       
+       // Луч напрален в низ и проверяет что под лезвием
         if (Physics.Raycast(ray, out hit, 2f))
         {
             if (hit.transform.TryGetComponent(out Iinteractable interatable))
             {
+                // Если под лезвием что то есть то отправляем события лезвию для удара
                 Detected.Invoke();
                 interatable.Interact();
                 _reaction.ReactionFor(interatable);
@@ -29,7 +30,7 @@ public class Detector : MonoBehaviour
         }
 
 
-
+        // Луч направлен вперед проверяет не столкнулся ли игрок с вертикальным препятствием
         ray = new Ray(transform.position, Vector3.forward);
         if (Physics.Raycast(ray, out hit, 1f))
         {

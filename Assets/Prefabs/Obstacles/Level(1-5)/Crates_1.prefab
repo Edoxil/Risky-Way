@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8665242948276701734}
   m_Layer: 0
   m_Name: Crates_1
-  m_TagString: Untagged
+  m_TagString: Vertical Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4
@@ -216,6 +216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MetalCrate (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4663609476042912258, guid: 9fd0133ccb948d341ad2bac552640d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: Vertical Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5472903448538032312, guid: 9fd0133ccb948d341ad2bac552640d45,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -290,6 +295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MetalCrate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663609476042912258, guid: 9fd0133ccb948d341ad2bac552640d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: Vertical Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 5472903448538032312, guid: 9fd0133ccb948d341ad2bac552640d45,
         type: 3}

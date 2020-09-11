@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &204409908885361255
 Transform:
@@ -4772,7 +4772,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &386338458092842305
 Transform:
@@ -4884,9 +4884,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386338458092842305}
     m_Modifications:
+    - target: {fileID: 100002, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: b46890100828db6429ff69c322b45893, type: 3}
       propertyPath: m_Name
       value: WFX_Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: b46890100828db6429ff69c322b45893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b46890100828db6429ff69c322b45893, type: 3}
       propertyPath: m_LocalPosition.x

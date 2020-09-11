@@ -15,7 +15,7 @@ public class Heart : MonoBehaviour, Iinteractable
     private void Update()
     {
         if (transform == null) { return; }
-        Vector3 rot = transform.eulerAngles;
+        Vector3 rot = transform.localEulerAngles;
         rot.y += _rotSpeed;
 
         transform.DOLocalRotate(rot, 0.1f);

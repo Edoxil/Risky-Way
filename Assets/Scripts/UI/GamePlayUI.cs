@@ -9,7 +9,7 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private Text _nextLevel = null;
     [SerializeField] private Slider _progressBar = null;
 
-
+    // Устанавливаем значения UI элементов при старте 
     public void GameStartedHandler()
     {
         int lvl = PlayerPrefs.GetInt("level");
@@ -21,7 +21,7 @@ public class GamePlayUI : MonoBehaviour
         _progressBar.minValue = 0;
     }
     
-        
+     // Методы обновления UI    
     public void SetProgressBarValue(float value)
     {
         if(_progressBar.minValue == 0)

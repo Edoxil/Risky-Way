@@ -7,8 +7,6 @@ public class ObjectsGenerator : MonoBehaviour
     private List<GameObject> obstacles = null;
     private List<GameObject> powerUps = null;
 
-
-
     public void Generate(LevelData level)
     {
         obstacles = level.ObstaclesPrefabs;
@@ -81,7 +79,7 @@ public class ObjectsGenerator : MonoBehaviour
 
             }
 
-            // Спавн койнов и сердец
+            // Спавн койнов и сердец по прямой
             int[] posX = { -2, 0, 2 };
             for (int i = 1; i < 12; i++)
             {
@@ -129,4 +127,3 @@ public class ObjectsGenerator : MonoBehaviour
     }
 
 }
-

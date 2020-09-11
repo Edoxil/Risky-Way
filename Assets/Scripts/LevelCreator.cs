@@ -18,6 +18,7 @@ public class LevelCreator : MonoBehaviour
         _levelData = _gameManager._levelData;
         _pathPrefab = _levelData.pathPrefab;
 
+        // Инстансим путь и затем генерируем обьекты
         Instantiate(_pathPrefab, transform.position, Quaternion.identity, transform);
         _generator.Generate(_levelData);
     }

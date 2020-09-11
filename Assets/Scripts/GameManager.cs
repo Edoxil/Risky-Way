@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour
     public LevelData _levelData = null;
 
     // Префаб объекта в котором создается уровень (путь, препятствия,паверапы)
+    [Space]
     [SerializeField] private GameObject _levelCreatorPrefab = null;
+    // Обьект для инстанса префаба (удаляется каждый уровень очищая сцену)
     private GameObject _levelCreator = null;
 
 
@@ -47,34 +49,43 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _cameraManager = CameraManager.GetInstance();
-       
         Initialize();
     }
-        
-
 
 
     private void Initialize()
     {
         if (_levelCreator != null)
         {
-            Destroy(_levelCreator, 0.5f);
+            Destroy(_levelCreator, 0.3f);
         }
         int curentLevel = PlayerPrefs.GetInt("level");
+
         if (curentLevel < 5)
         {
-            Debug.Log("DONT FORGET");
-            // TMP
-            PlayerPrefs.SetInt("level", 1);
-            _levelData = Levels[5];
-            //_levelData = Levels[Random.Range(0, Levels.Count)];
+            _levelData = Levels[Random.Range(0, 2)];
         }
-
-        PlayerPrefs.SetInt("lives", 3);
+        if (curentLevel > 5 && curentLevel < 10)
+        {
+            _levelData = Levels[Random.Range(2, 5)];
+        }
+        if (curentLevel > 10 && curentLevel < 15)
+        {
+            _levelData = Levels[Random.Range(5, 8)];
+        }
+        if (curentLevel > 15 && curentLevel < 20)
+        {
+            _levelData = Levels[Random.Range(8, 11)];
+        }
+        if (curentLevel > 20)
+        {
+            _levelData = Levels[Random.Range(11, 12)];
+        }
 
         _levelCreator = Instantiate(_levelCreatorPrefab, transform.position, Quaternion.identity);
         if (_levelCreator != null)
         {
+            PlayerPrefs.SetInt("lives", 3);
             Started?.Invoke();
             _playerMovement.SetFinish(_levelData.finish);
         }
@@ -94,8 +105,6 @@ public class GameManager : MonoBehaviour
 
         Initialize();
     }
-
-
     public void NextLevel()
     {
         int currentLevel = PlayerPrefs.GetInt("level");

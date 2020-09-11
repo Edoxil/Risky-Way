@@ -6,7 +6,7 @@ public class CrateWall : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody[] _cratesBodies = null;
-    [SerializeField] private List<Crate> _crates = null;
+    private List<Crate> _crates = null;
     private PlayerResources _playerResurses = null;
 
 
@@ -18,11 +18,8 @@ public class CrateWall : MonoBehaviour
         {
             _crates.Add(body.GetComponent<Crate>());
         }
-        
+
     }
-
-
-
     public void ExplodeHandler()
     {
 
@@ -44,7 +41,7 @@ public class CrateWall : MonoBehaviour
 
     private IEnumerator DestroyCrates()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
         foreach (Crate crate in _crates)
         {
             crate.Interact();

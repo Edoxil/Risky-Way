@@ -67,7 +67,6 @@ MonoBehaviour:
   - {fileID: 2678593161662430505}
   - {fileID: 2678593160581182448}
   - {fileID: 2678593160570457431}
-  _crates: []
 --- !u!54 &2678593160858900954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -251,6 +250,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2678593160829669784}
     m_Modifications:
+    - target: {fileID: 836495456, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495458, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495462, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495464, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495466, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495468, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495470, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495476, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 836495478, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 204409908885361254, guid: 7b4757e032852054e9f8761dfffaad47,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 204409910156170525, guid: 7b4757e032852054e9f8761dfffaad47,
         type: 3}
       propertyPath: Explode.m_PersistentCalls.m_Calls.Array.size
@@ -371,6 +411,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 1015381856817936379, guid: 7b4757e032852054e9f8761dfffaad47,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b4757e032852054e9f8761dfffaad47, type: 3}
 --- !u!4 &2337590919207110043 stripped
@@ -471,6 +516,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -552,6 +607,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,6 +697,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crate (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}
@@ -954,6 +1029,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1115,6 +1200,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1275,6 +1370,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crate (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302040903563177244, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401312788534467409, guid: 53e27b3238cc3f04798322dd325cad6e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8682120514519775142, guid: 53e27b3238cc3f04798322dd325cad6e,
         type: 3}

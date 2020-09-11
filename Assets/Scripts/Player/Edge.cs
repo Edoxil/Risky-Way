@@ -15,9 +15,9 @@ public class Edge : MonoBehaviour
 
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOLocalRotate(rotation, 0.1f));
-        seq.AppendInterval(0.05f);
-        seq.Append(transform.DOLocalRotate(_defaultRot, 0.1f));
+        seq.Append(transform.DOLocalRotate(rotation, 0.08f));
+        seq.AppendInterval(0.02f);
+        seq.Append(transform.DOLocalRotate(_defaultRot, 0.08f));
         seq.Play();
     }
 }      
